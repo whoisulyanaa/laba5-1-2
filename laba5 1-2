@@ -1,0 +1,141 @@
+import time
+import itertools
+
+# Параметры
+K = 10  # Количество артик товаров
+T = 2  # Минимальное количество артик для скидки
+N = 3  # Максимальное количество артик для скидки
+articles = [f"Товар_{i+1}" for i in range(K)] #Список артик товаров
+
+# --------------------- Вариант 1: Алгоритмический (через циклы) ---------------------
+
+def generate_discount_combinations_algorithmic(articles, T, N):
+    """
+    Генерирует все возможные комбинации артикулов для скидок алгоритмическим способом.
+    """
+    combinations = []
+    for r in range(T, N + 1):
+        def find_combinations(current_combination, start_index):
+            if len(current_combination) == r:
+                combinations.append(current_combination.copy())
+                
+                return
+
+            for i in range(start_index, len(articles)):
+                current_combination.append(articles[i])
+                find_combinations(current_combination, i + 1)
+                current_combination.pop()  # Backtrack: remove the last element
+
+        find_combinations([], 0)
+    return combinations
+
+# --------------------- Вариант 2: С использованием itertools ---------------------
+
+def generate_discount_combinations_itertools(articles, T, N):
+    """
+    Генерирует все возможные комбинации артикулов для скидок с использованием itertools.
+   """
+    combinations = []
+    for r in range(T, N + 1):
+        for combination in itertools.combinations(articles, r):
+            combinations.append(list(combination))  # Convert tuple to list
+    return combinations
+
+
+
+# Алгоритмический вариант
+start_time = time.time()
+combinations_algorithmic = generate_discount_combinations_algorithmic(articles, T, N)
+end_time = time.time()
+algorithmic_time = end_time - start_time
+
+# itertools вариант
+start_time = time.time()
+combinations_itertools = generate_discount_combinations_itertools(articles, T, N)
+end_time = time.time()
+itertools_time = end_time - start_time
+
+# Вывод результатов
+print(f"Количество артикулов: {K}, мин. артикулов в списке скидок: {T}, макс. артикулов в списке скидок: {N}")
+print(f"Алгоритмический вариант: сгенерировано {len(combinations_algorithmic)} комбинаций за {algorithmic_time:.6f} секунд")
+print(f"itertools вариант: сгенерировано {len(combinations_itertools)} комбинаций за {itertools_time:.6f} секунд")
+
+# Дополнительно:  Вывести первые несколько комбинаций (чтобы убедиться, что работает)
+print("\nПервые 5 комбинаций (алгоритмический вариант):")
+for i in range(min(5, len(combinations_algorithmic))):
+    print(combinations_algorithmic[i])
+
+print("\nПервые 5 комбинаций (itertools вариант):")
+for i in range(min(5, len(combinations_itertools))):
+    print(combinations_itertools[i])
+
+import time
+import itertools
+
+# Параметры
+K = 10  # Количество артик товаров
+T = 2  # Минимальное количество артик для скидки
+N = 3  # Максимальное количество артик для скидки
+articles = [f"Товар_{i+1}" for i in range(K)] #Список артик товаров
+
+# --------------------- Вариант 1: Алгоритмический (через циклы) ---------------------
+
+def generate_discount_combinations_algorithmic(articles, T, N):
+    """
+    Генерирует все возможные комбинации артикулов для скидок алгоритмическим способом.
+    """
+    combinations = []
+    for r in range(T, N + 1):
+        def find_combinations(current_combination, start_index):
+            if len(current_combination) == r:
+                combinations.append(current_combination.copy())
+                
+                return
+
+            for i in range(start_index, len(articles)):
+                current_combination.append(articles[i])
+                find_combinations(current_combination, i + 1)
+                current_combination.pop()  # Backtrack: remove the last element
+
+        find_combinations([], 0)
+    return combinations
+
+# --------------------- Вариант 2: С использованием itertools ---------------------
+
+def generate_discount_combinations_itertools(articles, T, N):
+    """
+    Генерирует все возможные комбинации артикулов для скидок с использованием itertools.
+   """
+    combinations = []
+    for r in range(T, N + 1):
+        for combination in itertools.combinations(articles, r):
+            combinations.append(list(combination))  # Convert tuple to list
+    return combinations
+
+
+
+# Алгоритмический вариант
+start_time = time.time()
+combinations_algorithmic = generate_discount_combinations_algorithmic(articles, T, N)
+end_time = time.time()
+algorithmic_time = end_time - start_time
+
+# itertools вариант
+start_time = time.time()
+combinations_itertools = generate_discount_combinations_itertools(articles, T, N)
+end_time = time.time()
+itertools_time = end_time - start_time
+
+# Вывод результатов
+print(f"Количество артикулов: {K}, мин. артикулов в списке скидок: {T}, макс. артикулов в списке скидок: {N}")
+print(f"Алгоритмический вариант: сгенерировано {len(combinations_algorithmic)} комбинаций за {algorithmic_time:.6f} секунд")
+print(f"itertools вариант: сгенерировано {len(combinations_itertools)} комбинаций за {itertools_time:.6f} секунд")
+
+# Дополнительно:  Вывести первые несколько комбинаций (чтобы убедиться, что работает)
+print("\nПервые 5 комбинаций (алгоритмический вариант):")
+for i in range(min(5, len(combinations_algorithmic))):
+    print(combinations_algorithmic[i])
+
+print("\nПервые 5 комбинаций (itertools вариант):")
+for i in range(min(5, len(combinations_itertools))):
+    print(combinations_itertools[i])
